@@ -1,4 +1,86 @@
 server:
-  port: 8090
+  port: 8094
   servlet:
-  context-path: /prod
+  context-path: /app
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  datasource:
+    password: admin
+    url: jdbc:postgresql://localhost:5432/gateway
+    username: postgres
+  jpa:
+    database: POSTGRESQL
+    generate-ddl: true
+    hibernate.ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        hbm2ddl:
+          charset_name: UTF-8
+          import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
+          import_files: bank.sql,channel.sql,commerce_activity.sql,country.sql,zone.sql,city.sql,currency.sql,deferred.sql,deferred_term.sql,document_type.sql,email_template.sql,franchise.sql,bin.sql,module.sql,permissions.sql,product_code.sql,response.sql,rules.sql,commerce.sql,role.sql,import.sql
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: wpossecommerce@gmail.com
+    password: tytilastpyeynsoo
+    properties:
+      mail:
+        smtp:
+          auth: true
+          quitwait: false
+          starttls:
+            enable: true
+            required: true
+  devtools:
+    restart:
+      enabled: false
+      additional-paths: C:\Projects\pasarela-back\src\main
+settings:
+  url:
+    front: http://localhost:4200
+    payment: http://localhost:4200/payment/
+    iso: http://127.0.0.1:7020/ganicu/txn
+    cybersource: http://127.0.0.1:8011
+    urlOtp: http://localhost:8090/app/payment/payer_validation
+  application:
+    name: MedianetPay
+    login-attempts: 3
+  mail:
+    time-reload: 30000
+  lot:
+    hour: 173000
+    cron: 0 50 17 ? * *
+  encryption:
+    aes:
+      key: 7Nc!zt!&GORqOUVs4l$u%YF%dry&qnNT
+  channel:
+    value:
+      email: 0.25
+      qr: 0.0
+      link: 0.0
+      sms: 0.3
+      whatsapp: 0.4
+  service:
+    sms:
+      phone_from: +18304838126
+      auth_token: 2dc39274413d57baebf4808ce9fec7b6
+      account_sid: ACae1dffafc5cbb56e63e891c7045c3668
+    whatsapp:
+      phone_from: +14155238886
+      auth_token: d8cec71422757de2f9c4d3dd6c46383f
+      account_sid: ACe8f93e03559446e653e6aad4cf972086
+  sftp:
+    host: localhost
+    port: 22
+    user: User1
+    password: 12345
+    path:
+  google:
+    recaptcha:
+      secret: 6LeFYcIhAAAAAOmDXdTfFG5kUIkGKTOu5kOgLQsh
+      url: https://www.google.com/recaptcha/api/siteverify
+      score-threshold: 0.5
